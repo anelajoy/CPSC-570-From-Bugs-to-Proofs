@@ -23,9 +23,11 @@ This chapter introduces **Rocq** (formerly known as Coq) with emphasis on constr
 
 ## Basic Theory
 
-Rocq differs from other unique programming langauges as it is mainly used for proof assistance. Due to that, its language is formatted in such a way that it would make it easier to write theorems. The Rocq Language itself contains features such as implicit arguments and notations, which are then translated into the the core language, **CoC** , into a definition that the **Rocq Kernel** can read and interpret. The Rocq Kernel itself is the most important part of Rocq, as it serves as being the smaller critical component of the entire system that focuses on checking important program terms such as **proof terms** and **types**  [^2]
+Rocq differs from other unique programming langauges as it is mainly used for proof assistance. Due to that, its language is formatted in such a way that it would make it easier to write theorems. The Rocq Language itself contains features such as implicit arguments and notations, which are then translated into the the core language, **CoC** , into a definition that the **Rocq Kernel** can read and interpret. CoC, or Calculus of Constructions, is a type theory that may serve as both a programming language and mathematical framework. It has the ability to define functions from terms to terms, terms to types, types to types, and types to terms. CoC was developed alongside Rocq and became the main theory that the interactive theorem prover follows.[^2][^3]
 
-Types in Rocq represent **logical propositions**, and the program are the **proofs** of those propositions
+The Rocq Kernel itself is the most important part of Rocq, as it serves as being the smaller critical component of the entire system that focuses on checking important CoC concepts such as **terms** and **types** that are written within the program.[^2]
+
+**Terms** are the basic expressions used in Rocq. They may be used to represent proofs, mathematical expressions, propositions, and even executable programs and program types. Every term needs to be associated wih a type. **Types** in Rocq represent logical propositions as well as the program that is the proof of those propositions, therefore making all types be terms, but not all terms are types. The Rocq Kernel checks whether a term has an associated type and if that type follows a certain *typing rule*.[^4]
 
 ## References
 
@@ -33,4 +35,6 @@ Types in Rocq represent **logical propositions**, and the program are the **proo
 
 [^2]: Core Language from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/language/core/index.html]
 
-[^3]: Basic Notions and Conventions from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/language/core/basic.html#term-term]
+[^3]: Calculus of Constructions Wikipedia Page. (Link)[https://en.wikipedia.org/wiki/Calculus_of_constructions]
+
+[^4]: Basic Notions and Conventions from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/language/core/basic.html#term-term]
