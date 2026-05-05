@@ -11,8 +11,8 @@ Prerequisite:
 
 How to check your work:
 
-    rocq compile tutorial_02_extraction_haskell.v
-    rocq compile hw_extraction_haskell.v
+    rocq compile tutorial_02_extraction_haskell.v -output-directory .
+    rocq compile hw_extraction_haskell.v -output-directory .
 
 Compiling this homework should write:
 

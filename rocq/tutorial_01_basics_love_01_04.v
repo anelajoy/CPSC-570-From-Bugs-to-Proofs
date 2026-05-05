@@ -15,11 +15,11 @@ Goal:
 How to use:
   - Step through the file in an editor with Rocq support, or run:
 
-        rocq compile tutorial_01_basics_love_01_04.v
+        rocq compile tutorial_01_basics_love_01_04.v -output-directory .
 
     Older Coq installations may use:
 
-        coqc tutorial_01_basics_love_01_04.v
+        coqc tutorial_01_basics_love_01_04.v -output-directory .
 
 Mental translation table:
 

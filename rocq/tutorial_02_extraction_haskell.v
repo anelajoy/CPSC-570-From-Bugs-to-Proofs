@@ -11,11 +11,11 @@ Goal:
 How to use:
   1. Step through this file interactively, or run:
 
-        rocq compile tutorial_02_extraction_haskell.v
+        rocq compile tutorial_02_extraction_haskell.v -output-directory .
 
      Older Coq installations may use:
 
-        coqc tutorial_02_extraction_haskell.v
+        coqc tutorial_02_extraction_haskell.v -output-directory .
 
   2. Compilation runs the `Extraction` command near the bottom and writes:
 
