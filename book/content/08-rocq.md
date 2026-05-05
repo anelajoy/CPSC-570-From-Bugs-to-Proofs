@@ -29,6 +29,19 @@ The Rocq Kernel itself is the most important part of Rocq, as it serves as being
 
 **Terms** are the basic expressions used in Rocq. They may be used to represent proofs, mathematical expressions, propositions, and even executable programs and program types. Every term needs to be associated wih a type. **Types** in Rocq represent logical propositions as well as the program that is the proof of those propositions, therefore making all types be terms, but not all terms are types. The Rocq Kernel checks whether a term has an associated type and if that type follows a certain *typing rule*.[^4]
 
+**Terms** are declared using commands such as *Definition*, *FixPoint*, *Theorem*, and *Compute*. 
+
+- *Definition* gives a name to a value, function, or proof term. They are used for *non-recursive programs*.
+
+```rocq
+(* Definitions, as well as other terms, follow this basic syntax: *)
+Definition name : type := body.
+
+(* An example of a Definition *)
+Definition reference_add_two (n : nat) : nat :=
+  n + 2.
+```
+
 ## References
 
 [^1]: Introduction and Contents from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/index.html]
@@ -38,3 +51,5 @@ The Rocq Kernel itself is the most important part of Rocq, as it serves as being
 [^3]: Calculus of Constructions Wikipedia Page. (Link)[https://en.wikipedia.org/wiki/Calculus_of_constructions]
 
 [^4]: Basic Notions and Conventions from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/language/core/basic.html#term-term]
+
+[^5]: From Bugs to Proofs tutorial_01_basics_love_01_04.v Github file. (Link)[https://github.com/LEAP-at-Chapman/CPSC-570-From-Bugs-to-Proofs/blob/main/rocq/tutorial_01_basics_love_01_04.v]
