@@ -74,9 +74,9 @@ Theorem name : proposition.
 (* An example of a Theorem *)
 Theorem reference_add_two_zero :
     reference_add_two 0 = 2. (* The proposition we want to prove is that 'reference_add_two_zero' equals 2 when it takes in 0. *)
-Proof. (* Begin the proof - go into Proof Mode *)
+Proof. (* Begin the proof, go into Proof Mode *)
   reflexivity. (* The specified tactic method that will be used to reach the goal of the proposed theorem *)
-Qed (* Terminate the proof - Exit Proof Mode *).
+Qed (* Terminate the proof, Exit Proof Mode *).
 ```
 
 - *Compute* is used to evaluate an expression and is often used for checking the output of an expression for testing purposes. It is not a proof by itself.
