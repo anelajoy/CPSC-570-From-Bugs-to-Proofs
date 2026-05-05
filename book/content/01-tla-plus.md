@@ -59,44 +59,110 @@ ASSUME N \in Nat /\ N > 0
 variables
     lockOwner = 0,          \* 0 means unlocked, otherwise process id
     waiting = [i \in 1..N |-> FALSE],
-    inCS = [i \in 1..N |-> FALSE];
+    inCS = [i \in 1..N |-> FALSE],
+    Proc \in 1..N;
 
-process (Proc \in 1..N)
-variables self = Proc;
+\*process (Proc \in 1..N)
 begin Loop:
     while TRUE do
 
 Try:
-        waiting[self] := TRUE;
+        waiting[Proc] := TRUE;
 
 Acquire:
         await lockOwner = 0;
-        lockOwner := self;
-        waiting[self] := FALSE;
+        lockOwner := Proc;
+        waiting[Proc] := FALSE;
 
 Critical:
-        inCS[self] := TRUE;
+        inCS[Proc] := TRUE;
 
 Exit:
-        inCS[self] := FALSE;
+        inCS[Proc] := FALSE;
         lockOwner := 0;
 
 Remainder:
         skip;
 
     end while;
-end process;
+\*end process;
 end algorithm;
 *)
 
 =============================================================================
 ```
 
-This code can be copy and pasted into TLC and then converted into TLA+ code. From there, you should be able to run the code and model the mutex lock. You should see that only one process will ever be in the critical zone at a time.
+This code can be copy and pasted into TLC or the TLA+ toolbox and then converted into TLA+ code.
+
+Converting it to TLA+ should give you the following code:
+
+```TLA+
+VARIABLES lockOwner, waiting, inCS, Proc, pc
+
+vars == << lockOwner, waiting, inCS, Proc, pc >>
+
+Init == (* Global variables *)
+        /\ lockOwner = 0
+        /\ waiting = [i \in 1..N |-> FALSE]
+        /\ inCS = [i \in 1..N |-> FALSE]
+        /\ Proc \in 1..N
+        /\ pc = "Loop"
+
+Loop == /\ pc = "Loop"
+        /\ pc' = "Try"
+        /\ UNCHANGED << lockOwner, waiting, inCS, Proc >>
+
+Try == /\ pc = "Try"
+       /\ waiting' = [waiting EXCEPT ![Proc] = TRUE]
+       /\ pc' = "Acquire"
+       /\ UNCHANGED << lockOwner, inCS, Proc >>
+
+Acquire == /\ pc = "Acquire"
+           /\ lockOwner = 0
+           /\ lockOwner' = Proc
+           /\ waiting' = [waiting EXCEPT ![Proc] = FALSE]
+           /\ pc' = "Critical"
+           /\ UNCHANGED << inCS, Proc >>
+
+Critical == /\ pc = "Critical"
+            /\ inCS' = [inCS EXCEPT ![Proc] = TRUE]
+            /\ pc' = "Exit"
+            /\ UNCHANGED << lockOwner, waiting, Proc >>
+
+Exit == /\ pc = "Exit"
+        /\ inCS' = [inCS EXCEPT ![Proc] = FALSE]
+        /\ lockOwner' = 0
+        /\ pc' = "Remainder"
+        /\ UNCHANGED << waiting, Proc >>
+
+Remainder == /\ pc = "Remainder"
+             /\ TRUE
+             /\ pc' = "Loop"
+             /\ UNCHANGED << lockOwner, waiting, inCS, Proc >>
+
+Next == Loop \/ Try \/ Acquire \/ Critical \/ Exit \/ Remainder
+
+Spec == Init /\ [][Next]_vars
+
+```
+
+From here, you can run the code and model the mutex lock. You should see that only one process will ever be in the critical zone at a time.
+
 ## Case Study
+
+For a more in depth look at the real world applications of TLA+, there was a particularly stubborn bug in the glibc libary. The essence of the bug is that sometimes the function pthread_cond_signal() wouldn't do anything (1). This is bad because that funciton is used by threads to communicate with each other, so if a thread tries to call the function and it randomly fails, that could cause the whole program to lock up (1). This function is used near universally, many programming languages make use of this function via wrapper calls, so it was imperative that the source of this bug be found and dealt with (1). A workaround was quickly devised, but it required calling a function that was computationally expensive, so the need for a proper fix remained.
+
+A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug with TLA+.
 
 ## Further Reasources
 
 - The [TLA+ homepage](https://lamport.azurewebsites.net/tla/tla.html), which contains an overview of the system as well as download links.
 
 - A [Wikipedia article](https://en.wikipedia.org/wiki/TLA%2B). This a good place to start if you would like a basic overview of the language.
+
+## References
+
+https://probablydance.com/2020/10/31/using-tla-in-the-real-world-to-understand-a-glibc-bug/
+
+https://github.com/skarupke/glibc_cv_tla_plus
+
