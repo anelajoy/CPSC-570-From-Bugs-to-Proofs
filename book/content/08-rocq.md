@@ -96,7 +96,19 @@ Check reference_length.
 Check reference_add_two_zero.
 ```
 
-## Program Extraction
+**Types** are used to construct logical foundations of mathematics by using foundations from *"type theory"* rather than the standard *"set theory"* due to Rocq's fundamental usage of CoC. Types may be seen as sets that contain terms, and a type that has at least one term is referred to an inhabited type. Types may also contain other types that apply to it. Due to the strict rule of terms needing an associated type, the Rocq Kernel always verifies that the rule is followed as well as making sure that the term and type are associated via one or several *typing rules*.[^4] 
+
+**Typing rules** exist as a way to make terms follow *type discipline*, in which they then are verified within a *global environment* with a *local context*. 
+
+## Introduction to Program Extraction with Rocq
+
+TBA
+
+## Theory and Action of Program Extraction
+
+TBA
+
+## Case Study
 
 TBA
 
