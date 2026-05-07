@@ -1,0 +1,215 @@
+DIGEST cefeda511af8806b813eb78615ee629d
+Ftutorial_02_extraction_haskell
+R1440:1450 Stdlib.Arith.Arith <> <> lib
+R1480:1488 Stdlib.Bool.Bool <> <> lib
+R1518:1527 Stdlib.Lists.List <> <> lib
+R1557:1570 Stdlib.Strings.String <> <> lib
+R1588:1615 Stdlib.extraction.Extraction <> <> lib
+R1626:1638 Stdlib.Lists.List ListNotations <> mod
+rec 1991:1999 <> line_item
+proj 2015:2017 <> sku
+proj 2031:2038 <> quantity
+R2021:2026 Stdlib.Strings.String <> string ind
+R2042:2044 Corelib.Init.Datatypes <> nat ind
+rec 2057:2061 <> order
+proj 2077:2084 <> order_id
+proj 2095:2102 <> customer
+proj 2116:2119 <> rush
+proj 2131:2135 <> items
+R2088:2090 Corelib.Init.Datatypes <> nat ind
+R2106:2111 Stdlib.Strings.String <> string ind
+R2123:2126 Corelib.Init.Datatypes <> bool ind
+R2139:2142 Corelib.Init.Datatypes <> list ind
+R2144:2152 tutorial_02_extraction_haskell <> line_item rec
+ind 2168:2177 <> validation
+constr 2193:2197 <> Valid
+constr 2216:2222 <> Invalid
+R2201:2210 tutorial_02_extraction_haskell <> validation:9 ind
+R2237:2240 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R2226:2229 Corelib.Init.Datatypes <> list ind
+R2231:2236 Stdlib.Strings.String <> string ind
+R2241:2250 tutorial_02_extraction_haskell <> validation:9 ind
+scheme 2168:2177 <> validation_rect
+scheme 2168:2177 <> validation_ind
+scheme 2168:2177 <> validation_rec
+scheme 2168:2177 <> validation_sind
+def 2590:2605 <> merge_validation
+R2616:2625 tutorial_02_extraction_haskell <> validation ind
+binder 2608:2609 <> v1:11
+binder 2611:2612 <> v2:12
+R2630:2639 tutorial_02_extraction_haskell <> validation ind
+R2656:2657 tutorial_02_extraction_haskell <> v2:12 var
+R2652:2653 tutorial_02_extraction_haskell <> v1:11 var
+R2668:2672 tutorial_02_extraction_haskell <> Valid constr
+R2675:2679 tutorial_02_extraction_haskell <> Valid constr
+R2684:2688 tutorial_02_extraction_haskell <> Valid constr
+R2694:2700 tutorial_02_extraction_haskell <> Invalid constr
+R2706:2710 tutorial_02_extraction_haskell <> Valid constr
+R2715:2721 tutorial_02_extraction_haskell <> Invalid constr
+R2730:2734 tutorial_02_extraction_haskell <> Valid constr
+R2737:2743 tutorial_02_extraction_haskell <> Invalid constr
+R2751:2757 tutorial_02_extraction_haskell <> Invalid constr
+R2766:2772 tutorial_02_extraction_haskell <> Invalid constr
+R2779:2785 tutorial_02_extraction_haskell <> Invalid constr
+R2794:2800 tutorial_02_extraction_haskell <> Invalid constr
+R2803:2810 Stdlib.Lists.List <> app abbrev
+def 2840:2852 <> validate_item
+R2862:2870 tutorial_02_extraction_haskell <> line_item rec
+binder 2855:2858 <> item:15
+R2875:2884 tutorial_02_extraction_haskell <> validation ind
+R2908:2911 Stdlib.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R2895:2902 tutorial_02_extraction_haskell <> quantity proj
+R2904:2907 tutorial_02_extraction_haskell <> item:15 var
+R2977:2981 tutorial_02_extraction_haskell <> Valid constr
+R2928:2934 tutorial_02_extraction_haskell <> Invalid constr
+R2936:2936 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R2964:2964 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+def 2994:3007 <> validate_items
+R3015:3018 Corelib.Init.Datatypes <> list ind
+R3020:3028 tutorial_02_extraction_haskell <> line_item rec
+binder 3010:3011 <> xs:16
+R3033:3042 tutorial_02_extraction_haskell <> validation ind
+R3055:3056 tutorial_02_extraction_haskell <> xs:16 var
+R3067:3068 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R3073:3077 tutorial_02_extraction_haskell <> Valid constr
+R3087:3090 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3099:3114 tutorial_02_extraction_haskell <> merge_validation def
+R3117:3129 tutorial_02_extraction_haskell <> validate_item def
+R3138:3151 tutorial_02_extraction_haskell <> validate_items:17 def
+def 3178:3191 <> validate_order
+R3198:3202 tutorial_02_extraction_haskell <> order rec
+binder 3194:3194 <> o:19
+R3207:3216 tutorial_02_extraction_haskell <> validation ind
+R3229:3233 tutorial_02_extraction_haskell <> items proj
+R3235:3235 tutorial_02_extraction_haskell <> o:19 var
+R3246:3247 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R3252:3258 tutorial_02_extraction_haskell <> Invalid constr
+R3260:3260 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3281:3281 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3292:3305 tutorial_02_extraction_haskell <> validate_items def
+R3308:3312 tutorial_02_extraction_haskell <> items proj
+R3314:3314 tutorial_02_extraction_haskell <> o:19 var
+def 3334:3353 <> total_quantity_items
+R3361:3364 Corelib.Init.Datatypes <> list ind
+R3366:3374 tutorial_02_extraction_haskell <> line_item rec
+binder 3356:3357 <> xs:20
+R3379:3381 Corelib.Init.Datatypes <> nat ind
+R3394:3395 tutorial_02_extraction_haskell <> xs:20 var
+R3406:3407 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R3422:3425 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R3447:3449 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R3434:3441 tutorial_02_extraction_haskell <> quantity proj
+R3450:3469 tutorial_02_extraction_haskell <> total_quantity_items:21 def
+def 3495:3508 <> total_quantity
+R3515:3519 tutorial_02_extraction_haskell <> order rec
+binder 3511:3511 <> o:23
+R3524:3526 Corelib.Init.Datatypes <> nat ind
+R3533:3552 tutorial_02_extraction_haskell <> total_quantity_items def
+R3555:3559 tutorial_02_extraction_haskell <> items proj
+R3561:3561 tutorial_02_extraction_haskell <> o:23 var
+def 3577:3594 <> order_has_rush_fee
+R3601:3605 tutorial_02_extraction_haskell <> order rec
+binder 3597:3597 <> o:24
+R3610:3613 Corelib.Init.Datatypes <> bool ind
+R3626:3629 Corelib.Init.Datatypes <> ::bool_scope:x_'&&'_x not
+R3620:3623 tutorial_02_extraction_haskell <> rush proj
+R3625:3625 tutorial_02_extraction_haskell <> o:24 var
+R3630:3633 Corelib.Init.Datatypes <> negb def
+R3652:3655 Stdlib.Arith.PeanoNat <> ::nat_scope:x_'=?'_x not
+R3636:3649 tutorial_02_extraction_haskell <> total_quantity def
+R3651:3651 tutorial_02_extraction_haskell <> o:24 var
+rec 3672:3678 <> summary
+proj 3694:3709 <> summary_order_id
+proj 3720:3735 <> summary_customer
+proj 3749:3766 <> summary_item_count
+proj 3777:3798 <> summary_total_quantity
+proj 3809:3821 <> summary_valid
+proj 3833:3848 <> summary_rush_fee
+R3713:3715 Corelib.Init.Datatypes <> nat ind
+R3739:3744 Stdlib.Strings.String <> string ind
+R3770:3772 Corelib.Init.Datatypes <> nat ind
+R3802:3804 Corelib.Init.Datatypes <> nat ind
+R3825:3828 Corelib.Init.Datatypes <> bool ind
+R3852:3855 Corelib.Init.Datatypes <> bool ind
+def 3872:3890 <> validation_is_valid
+R3897:3906 tutorial_02_extraction_haskell <> validation ind
+binder 3893:3893 <> v:32
+R3911:3914 Corelib.Init.Datatypes <> bool ind
+R3927:3927 tutorial_02_extraction_haskell <> v:32 var
+R3938:3942 tutorial_02_extraction_haskell <> Valid constr
+R3947:3950 Corelib.Init.Datatypes <> true constr
+R3956:3962 tutorial_02_extraction_haskell <> Invalid constr
+R3969:3973 Corelib.Init.Datatypes <> false constr
+def 3994:4006 <> order_summary
+R4013:4017 tutorial_02_extraction_haskell <> order rec
+binder 4009:4009 <> o:34
+R4022:4028 tutorial_02_extraction_haskell <> summary rec
+R4038:4053 tutorial_02_extraction_haskell <> summary_order_id proj
+R4075:4090 tutorial_02_extraction_haskell <> summary_customer proj
+R4112:4129 tutorial_02_extraction_haskell <> summary_item_count proj
+R4162:4183 tutorial_02_extraction_haskell <> summary_total_quantity proj
+R4211:4223 tutorial_02_extraction_haskell <> summary_valid proj
+R4273:4288 tutorial_02_extraction_haskell <> summary_rush_fee proj
+R4058:4065 tutorial_02_extraction_haskell <> order_id proj
+R4067:4067 tutorial_02_extraction_haskell <> o:34 var
+R4095:4102 tutorial_02_extraction_haskell <> customer proj
+R4104:4104 tutorial_02_extraction_haskell <> o:34 var
+R4134:4144 Stdlib.Lists.List <> length abbrev
+R4147:4151 tutorial_02_extraction_haskell <> items proj
+R4153:4153 tutorial_02_extraction_haskell <> o:34 var
+R4188:4201 tutorial_02_extraction_haskell <> total_quantity def
+R4203:4203 tutorial_02_extraction_haskell <> o:34 var
+R4228:4246 tutorial_02_extraction_haskell <> validation_is_valid def
+R4249:4262 tutorial_02_extraction_haskell <> validate_order def
+R4264:4264 tutorial_02_extraction_haskell <> o:34 var
+R4293:4310 tutorial_02_extraction_haskell <> order_has_rush_fee def
+R4312:4312 tutorial_02_extraction_haskell <> o:34 var
+def 4330:4340 <> sample_item
+R4344:4352 tutorial_02_extraction_haskell <> line_item rec
+R4362:4364 tutorial_02_extraction_haskell <> sku proj
+R4380:4387 tutorial_02_extraction_haskell <> quantity proj
+def 4410:4421 <> sample_order
+R4425:4429 tutorial_02_extraction_haskell <> order rec
+R4439:4446 tutorial_02_extraction_haskell <> order_id proj
+R4461:4468 tutorial_02_extraction_haskell <> customer proj
+R4485:4488 tutorial_02_extraction_haskell <> rush proj
+R4504:4508 tutorial_02_extraction_haskell <> items proj
+R4493:4496 Corelib.Init.Datatypes <> true constr
+R4513:4513 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R4525:4525 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R4514:4524 tutorial_02_extraction_haskell <> sample_item def
+def 4543:4553 <> empty_order
+R4557:4561 tutorial_02_extraction_haskell <> order rec
+R4571:4578 tutorial_02_extraction_haskell <> order_id proj
+R4593:4600 tutorial_02_extraction_haskell <> customer proj
+R4619:4622 tutorial_02_extraction_haskell <> rush proj
+R4639:4643 tutorial_02_extraction_haskell <> items proj
+R4627:4631 Corelib.Init.Datatypes <> false constr
+R4648:4649 Stdlib.Lists.List ListNotations ::list_scope:'['_']' not
+R4664:4677 tutorial_02_extraction_haskell <> validate_order def
+R4679:4690 tutorial_02_extraction_haskell <> sample_order def
+R4701:4714 tutorial_02_extraction_haskell <> total_quantity def
+R4716:4727 tutorial_02_extraction_haskell <> sample_order def
+R4738:4750 tutorial_02_extraction_haskell <> order_summary def
+R4752:4762 tutorial_02_extraction_haskell <> empty_order def
+prf 5103:5124 <> empty_order_is_invalid
+R5158:5160 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5132:5145 tutorial_02_extraction_haskell <> validate_order def
+R5147:5157 tutorial_02_extraction_haskell <> empty_order def
+R5161:5167 tutorial_02_extraction_haskell <> Invalid constr
+R5169:5169 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R5190:5190 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+prf 5229:5248 <> sample_item_is_valid
+R5281:5283 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5256:5268 tutorial_02_extraction_haskell <> validate_item def
+R5270:5280 tutorial_02_extraction_haskell <> sample_item def
+R5284:5288 tutorial_02_extraction_haskell <> Valid constr
+prf 5327:5353 <> sample_order_total_quantity
+R5388:5390 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5361:5374 tutorial_02_extraction_haskell <> total_quantity def
+R5376:5387 tutorial_02_extraction_haskell <> sample_order def
+prf 5430:5456 <> empty_order_has_no_rush_fee
+R5494:5496 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5464:5481 tutorial_02_extraction_haskell <> order_has_rush_fee def
+R5483:5493 tutorial_02_extraction_haskell <> empty_order def
+R5497:5501 Corelib.Init.Datatypes <> false constr
