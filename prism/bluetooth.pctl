@@ -1,0 +1,52 @@
+// Properties for bluetooth.pm
+//
+// The model leaves three constants undefined:
+//   mrec - number of replies to receive before inquiry stops
+//   k    - receiver's initial frequency, in 1..16
+//   T    - receiver's initial train, in 0..1
+//
+// Example run:
+//   prism bluetooth.pm bluetooth.pctl -const mrec=1,k=1,T=0
+
+// A model-step deadline for bounded reachability. This counts PRISM transitions,
+// not elapsed Bluetooth slots; use the "time" reward for elapsed slot estimates.
+const int max_steps;
+
+// Helpful names for the major milestones in the inquiry protocol.
+label "done" = rec=mrec;
+label "first_reply" = rec>=1;
+label "heard_packet" = receiver=2 | receiver=3;
+label "waiting_backoff" = receiver=3;
+
+// Probability that the inquiry eventually receives the requested number of
+// replies. For small mrec values this should normally be 1.
+P=? [ F "done" ]
+
+// Qualitative version of the same check: every run eventually completes.
+P>=1 [ F "done" ]
+
+// Probability of receiving at least one reply. Useful when mrec is greater
+// than 1, because it separates "can discover anything?" from "can finish?".
+P=? [ F "first_reply" ]
+
+// Probability that the receiver ever hears the sender and enters the reply
+// path, before the reply counter itself is inspected.
+P=? [ F "heard_packet" ]
+
+// Probability of reaching the random backoff state after a reply is sent.
+// This focuses on the randomized part of the receiver behavior.
+P=? [ F "waiting_backoff" ]
+
+// Expected elapsed time, in Bluetooth slots according to the model's "time"
+// reward, until the requested number of replies has been received.
+R{"time"}=? [ F "done" ]
+
+// Expected elapsed time until the first reply is received.
+R{"time"}=? [ F "first_reply" ]
+
+// Bounded progress: probability of completing within max_steps PRISM
+// transitions. Change max_steps to compare deadlines.
+P=? [ F<=max_steps "done" ]
+
+// Sanity check: the reply counter never exceeds the requested target.
+P>=1 [ G (rec<=mrec) ]

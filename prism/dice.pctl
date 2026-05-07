@@ -1,0 +1,32 @@
+// Properties for dice.pm
+//
+// The model simulates a fair six-sided die using fair coin flips.
+// State s=7 is absorbing and d stores the final die value.
+
+// Pick a face with, for example, -const face=1.
+const int face;
+
+// Pick a model-step bound for the bounded reachability query below.
+// Three steps is enough for the first possible outcomes, but not for all runs
+// because the construction may reject and retry.
+const int max_steps;
+
+// Qualitative termination: the die eventually reaches its absorbing final state
+// with probability 1.
+P>=1 [ F s=7 ]
+
+// Quantitative termination: returns the exact probability of eventually stopping.
+// This should evaluate to 1.
+P=? [ F s=7 ]
+
+// Fairness of an individual face: for any face in 1..6, this should be 1/6.
+// Example: prism dice.pm dice.pctl -prop 3 -const face=6
+P=? [ F (s=7 & d=face) ]
+
+// Probability of having completed within max_steps model transitions.
+// This is useful for seeing that rejection sampling may need multiple rounds.
+P=? [ F<=max_steps s=7 ]
+
+// Sanity check on final states: whenever the model has stopped, the stored die
+// value is one of the six valid faces.
+P>=1 [ G (s=7 => (d>=1 & d<=6)) ]
