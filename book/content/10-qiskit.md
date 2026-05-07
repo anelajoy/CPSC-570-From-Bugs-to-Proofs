@@ -19,7 +19,9 @@ This chapter introduces **Qiskit** for designing and running quantum circuits (s
 
 ### Introduction
 
-Qiskit is a Python library developed by IBM for interacting with quantum computers.
+[Qiskit](https://www.ibm.com/quantum/qiskit) is an [open-source Python library](https://github.com/Qiskit/qiskit) developed by IBM for interacting with quantum computers. It supports simulating small quantum circuits on classical hardware in addition to interacting with cloud quantum providers for more complex workloads. Popular use cases for the library include quantum information science experimentation, hybrid orchestration of quantum and classical resources, and the development of quantum algorithms. Qiskit is advertised as a complete quantum computing solution including tools for preprocessing, hardware optimization, postprocessing, and visualization.
+
+This chapter starts with background information about classical and quantum computing, qubits, and common quantum gates. The remainder of the text provides tutorials and examples for using the Qiskit library to simulate simple circuits on local hardware, connecting to the [IBM Quantum Platform](https://quantum.cloud.ibm.com), and executing one of the foundational algorithms in the field of quantum computing on real hardware.
 
 ### Background
 
@@ -31,7 +33,7 @@ Gordon Moore, the co-founder and former CEO of Intel, famously predicted that th
 
 #### Quantum Theory
 
-Our physical world is governed by the fundamental laws of physics. While classical physics can be used to describe pheneomena at macroscopic and microscopic scales, quantum physics models submicroscopic and subatomic properties. A foundational understanding in quantum theory is required to explain electromagnetism, the strong force, the weak force, and gravity.
+Our physical world is governed by the fundamental laws of physics. While classical physics can be used to describe pheneomena at macroscopic and microscopic scales, quantum physics models submicroscopic and subatomic properties. A foundational understanding in quantum theory is required to explain electromagnetism, the strong force, the weak force, and gravity. Quantum systems are known to exhibit properties of both particles and waves (a concept known as wave-particle duality). One of the field's defining features that is not present in classical mechanics is quantum entanglement, or the idea that quantum states in a group cannot be described independently, regardless of the distances between them.
 
 #### Quantum Computing
 
@@ -159,6 +161,10 @@ After optimizing the circuit for execution on quantum hardware and sampling the 
 
 ![Result of the Grover circuit](./10-qiskit/grover_result.png)
 
+### Conclusion
+
+Quantum computing is an emerging field with foundations in quantum mechanics and classical computing. Qiskit is a Python library for specifying, executing, and visualizing quantum circuits. This chapter briefly introduced the theoretical foundations of quantum computing, basics of the Qiskit library, and executing circuits on quantum hardware.
+
 ### References & Resources
 
 #### Qiskit
@@ -174,6 +180,7 @@ After optimizing the circuit for execution on quantum hardware and sampling the 
 #### Quantum Theory
 
 - [Quantum mechanics](https://en.wikipedia.org/wiki/Quantum_mechanics)
+- [Quantum entanglement](https://en.wikipedia.org/wiki/Quantum_entanglement)
 
 #### Quantum Computing
 
