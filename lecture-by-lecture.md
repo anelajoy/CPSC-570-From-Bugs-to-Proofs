@@ -39,7 +39,7 @@
 * L11.2: [Haskell](https://www.haskell.org/): [Learn You a Haskell for Great Good](https://learnyouahaskell.github.io/), [Wiki](https://wiki.haskell.org/index.php?title=Haskell), [Comparison with Lean LoVe](haskell/tutorial-love-demos-01-04.hs), [Tutorial #1](haskell/tutorial-01-pure-types.hs), [Exercises](haskell/hw-fp-basics.hs)
 * L12.1: [Haskell](https://www.haskell.org/): [Learn You a Haskell for Great Good](https://learnyouahaskell.github.io/), [Wiki](https://wiki.haskell.org/index.php?title=Haskell), [Tutorial #1: Pure types](haskell/tutorial-01-pure-types.hs), 
 [Tutorial #2: I/O and effects](haskell/tutorial-02-io-effects.hs) [Exercises #1](haskell/hw-fp-basics.hs) and [Exercises #2](haskell/hw-effects.hs)
-* L12.2: Lab to work on the boo
+* L12.2: Lab to work on the book
 * L13.1: [Rocq](http://rocq-prover.org/): Tutorials: [Basics](rocq/tutorial_01_basics_love_01_04.v) & [Extraction](rocq/tutorial_02_extraction_haskell.v); [Homework on extraction](rocq/hw_extraction_haskell.v). Lab for the book and homework.
 * L13.2: [PRISM](https://www.prismmodelchecker.org/): [Intro to Probabilistic Model Checking](https://www.prismmodelchecker.org/lectures/esslli10/esslli10pmc-part1.pdf), [Tutorials](https://www.prismmodelchecker.org/tutorial/), [Property Specs in PRISM](https://www.prismmodelchecker.org/manual/PropertySpecification/AllOnOnePage), [Case Studies](https://www.prismmodelchecker.org/casestudies/index.php). Lab for the book and homework.
 
