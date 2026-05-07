@@ -152,7 +152,9 @@ From here, you can run the code and model the mutex lock. You should see that on
 
 For a more in depth look at the real world applications of TLA+, there was a particularly stubborn bug in the glibc libary. The essence of the bug is that sometimes the function pthread_cond_signal() wouldn't do anything (1). This is bad because that funciton is used by threads to communicate with each other, so if a thread tries to call the function and it randomly fails, that could cause the whole program to lock up (1). This function is used near universally, many programming languages make use of this function via wrapper calls, so it was imperative that the source of this bug be found and dealt with (1). A workaround was quickly devised, but it required calling a function that was computationally expensive, so the need for a proper fix remained.
 
-A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug with TLA+.
+A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug using TLA+. He firstly worked his way through the problem area of the glibc code, translating the sections he wanted to test into TLA+ code. 
+
+Initally the code didn't produce any bugs
 
 ## Further Reasources
 
