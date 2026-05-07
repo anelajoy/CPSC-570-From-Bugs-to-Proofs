@@ -1,13 +1,23 @@
-local
+# Local scratch space
+local/
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.orig
 
-# Build outputs
+# Jupyter Book / MyST
 _build/
-_build/**
+book/_build/
 .jupyter_cache/
-.jupyter_cache/**
+**/.jupyter_cache/
+.myst/
+**/.myst/
 
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -27,6 +37,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
 
 # Virtual environments
 .env
@@ -39,7 +53,87 @@ env.bak/
 venv.bak/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Rocq / Coq
+*.aux
+.*.aux
+*.glob
+*.vo
+*.vos
+*.vok
+*.vio
+*.d
+.lia.cache
+.nia.cache
+.coq-native/
+**/.coq-native/
+
+# Lean
+.lake/
+lake-packages/
+*.olean
+*.ilean
+
+# Haskell / Cabal / Stack
+*.hi
+*.o
+*.dyn_hi
+*.dyn_o
+*.prof
+*.hp
+*.eventlog
+.stack-work/
+dist-newstyle/
+.cabal-sandbox/
+cabal.sandbox.config
+
+# Dafny generated outputs
+*.doo
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+dafny/**/*.cs
+dafny/**/*.js
+dafny/**/*.go
+dafny/**/*.java
+dafny/**/*.py
+
+# TLA+ / TLC / Toolbox generated files
+states/
+**/states/
+.tlacache/
+**/.tlacache/
+*.toolbox/
+*.trace
+*.dump
+MC.out
+MC.err
+TLC.out
+TLC.err
+
+# Alloy analyzer outputs
+.alloytmp/
+**/.alloytmp/
+*.als.xml
+*.cnf
+
+# nuXmv / model checker generated files
+*.ord
+*.dot
+*.dimacs
+*.wff
+*.fsm
+*.out
+*.err
+
+# UPPAAL generated files
+*.xtr
+*.if
+*.ta
 
 # IDE
 .vscode/
@@ -56,10 +150,6 @@ venv.bak/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Temporary files
-*.tmp
-*.temp
 
 # Node.js / JavaScript
 node_modules/
