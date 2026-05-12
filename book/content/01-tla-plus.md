@@ -154,7 +154,11 @@ For a more in depth look at the real world applications of TLA+, there was a par
 
 A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug using TLA+. He firstly worked his way through the problem area of the glibc code, translating the sections he wanted to test into TLA+ code. 
 
-Initally the code didn't produce any bugs
+Initally the code didn't produce any bugs, but after some simplifications and increasing the number of times a process is signaled up to four, a bug finally occured. The program reached a deadlock state where both processes were sleeping at a futex lock while there was still work to do, and the program was unable to wake either process up because it thought they were located in a signal group that neither process was actually apart of.
+
+From here Skarupke used the TLA+ file he had written to experiemnt around with different potential solutions to the bug, relying on the TLA+ model checker to determine if any of the changes resolved the bug or not. He was eventually able to come up with a fix for the bug that relied on processes declaring themselves to be asleep just before they finished their last piece of work. This change not only fixed the bug, but also allow Skarupke to simplify the glibc code significantly. He would go on to submit his findings to the developers of the glibc library.
+
+This story shows that TLA+ is a very capable tool for verification. As Skarupke describes, TLA+ has an incredible ability to narrow in on the exact faults within your program, along with providing you the shortest possible path that results in said bug (1). Additionally, thanks to the exisitance of pluscal, it's fairly easy to transfer a C or C++ program into TLA+ code. This allows you to more easily search your own code for bugs and quickly stress test solutions.
 
 ## Further Reasources
 
