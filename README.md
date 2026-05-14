@@ -19,6 +19,7 @@ Possible languages used in this course are, for example, Python, Haskell, Lean, 
 ## Content
 
 **Quick Links**:
+- [Built book](https://leap-at-chapman.github.io/CPSC-570-From-Bugs-to-Proofs/)
 - [Overview](overview.md)
 - [Lecture by Lecture](lecture-by-lecture.md)
 - [Canvas](https://canvas.chapman.edu/courses/83641)
