@@ -42,5 +42,6 @@
 * L12.2: Lab to work on the book
 * L13.1: [Rocq](http://rocq-prover.org/): Tutorials: [Basics](rocq/tutorial_01_basics_love_01_04.v) & [Extraction](rocq/tutorial_02_extraction_haskell.v); [Homework on extraction](rocq/hw_extraction_haskell.v). Lab for the book and homework.
 * L13.2: [PRISM](https://www.prismmodelchecker.org/): [Intro to Probabilistic Model Checking](https://www.prismmodelchecker.org/lectures/esslli10/esslli10pmc-part1.pdf), [Tutorials](https://www.prismmodelchecker.org/tutorial/), [Property Specs in PRISM](https://www.prismmodelchecker.org/manual/PropertySpecification/AllOnOnePage), [Case Studies](https://www.prismmodelchecker.org/casestudies/index.php). Lab for the book and homework.
+* L14.1: Quantum circuits and diagrams: [Intro](https://vdwetering.name/pdfs/presentation-fosdem.pdf) to [Qiskit](https://www.ibm.com/quantum/qiskit) and [PyZX](https://github.com/zxcalc/pyzx), [demo](https://zxcalculus.com/pyzx.html). Lab for the book and homework.
 
 

@@ -112,9 +112,11 @@ The relationship between terms and types are one of the fundamental aspects of R
 
 ## Introduction to Program Extraction with Rocq
 
-As an interactive proof asistant program, 
+Although Rocq is mainly seen as an interactive proof asistant program, it also functions as a programming language. Due to this dual role, Rocq is able to convert its theorems into executable programs. The theory behind turning theorems into programs assumes that proofs contain computational content and that building blocks from both proofs and programs correspond to each other, such as propositions corresponding to types, proof simplification corresponding to program evaluation, and proofs states corresponding to functions within a program. This theory is referred to as the *Curry-Howard correspondence*.[^6]
 
-## Theory and Action of Program Extraction
+The ability to perform program extraction is one of the most important and unique 
+
+## How to Perform Program Extraction
 
 TBA
 
@@ -133,3 +135,7 @@ TBA
 [^4]: Basic Notions and Conventions from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/language/core/basic.html#term-term]
 
 [^5]: From Bugs to Proofs tutorial_01_basics_love_01_04.v Github file. (Link)[https://github.com/LEAP-at-Chapman/CPSC-570-From-Bugs-to-Proofs/blob/main/rocq/tutorial_01_basics_love_01_04.v]
+
+[^6]: Curry-Howard Correspondence Wikipedia Page. (Link)[https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence]
+
+[^7]: Program Extraction from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/addendum/extraction.html]
