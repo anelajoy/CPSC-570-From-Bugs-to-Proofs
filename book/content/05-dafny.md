@@ -12,9 +12,9 @@ This chapter introduces **Dafny** for specifying and verifying imperative and fu
 
 **Dafny** is a "verification-aware programming language". "Verification-aware" means that the language is designed to incorporate formal verfication directly into their development and runtime operations. This is particularly useful when a system is needed to be "provably correct", i.e. mathematically proven to be correct, and not just "probably correct". **Dafny** natively support recodring specifications and integrates static program verfifier. It empowers developers to write provably correct code with respect to their specifications through combining sophisticated automated reasoning with familiar programming idioms and tools. It compiles to popular coding languages such as C#, Java, JavaScript, Go, and Python, allowing integration with existing workflows [1].
 
-**Dafny** was created by K. Rustan M. Leino at Microsoft Research, building on his earlier work on ESC/Modula-3, ESC/Java, and Spec#. Leino has since moved to Amazon Web Services, where his team applies Dafny to security-critical infrastructure, including the AWS Encryption SDK and the Cedar policy engine [2, 3].
+**Dafny** was created by K. Rustan M. Leino at Microsoft Research, building on his earlier work on ESC/Modula-3, ESC/Java, and Spec#. Leino has since moved to Amazon Web Services, where his team applies Dafny to security-critical infrastructure, including the AWS Encryption SDK and the Cedar policy engine [2]-[3].
 
-Under the hood, Dafny translates programs to the Boogie intermediate verification language and then dispatches proof obligations to the Z3 SMT (Satisfiability Modulo Theories) solver. If Z3 can construct a proof, the program is verified. If not, Dafny reports a counterexample directly in the editor, enabling immediate feedback much like a type-checker does today [2, 4].
+Under the hood, Dafny translates programs to the Boogie intermediate verification language and then dispatches proof obligations to the Z3 SMT (Satisfiability Modulo Theories) solver. If Z3 can construct a proof, the program is verified. If not, Dafny reports a counterexample directly in the editor, enabling immediate feedback much like a type-checker does today [2],[4].
 
 ### Why Use Dafny?
 
@@ -73,7 +73,7 @@ Binary search is one of computer science's most celebrated algorithms, one where
 ### Specification
 Before writing a single line of implementation, we state what binary search should do:
 - Input (Precondition): a sorted sequence of integers and a key to search for.
-- Output (Postcondition): an index into the sequence, or -1 if the key is not present.
+- Output (Postcondition): an index in the sequence, or -1 if the key is not present.
 - Correctness: if a valid index is returned, the element at that index equals the key. If -1 is returned, the key is absent from the entire sequence.
 
 In **Dafny**, the precondition and postcondition capture these requirements precisely:
