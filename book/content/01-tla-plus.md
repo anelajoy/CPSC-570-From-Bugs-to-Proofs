@@ -150,9 +150,15 @@ From here, you can run the code and model the mutex lock. You should see that on
 
 ## Case Study
 
-For a more in depth look at the real world applications of TLA+, there was a particularly stubborn bug in the glibc libary. The essence of the bug is that sometimes the function pthread_cond_signal() wouldn't do anything (1). This is bad because that funciton is used by threads to communicate with each other, so if a thread tries to call the function and it randomly fails, that could cause the whole program to lock up (1). This function is used near universally, many programming languages make use of this function via wrapper calls, so it was imperative that the source of this bug be found and dealt with (1). A workaround was quickly devised, but it required calling a function that was computationally expensive, so the need for a proper fix remained.
+For a more in depth look at the real world applications of TLA+, there was a particularly stubborn bug in the glibc libary. The essence of the bug is that sometimes the function pthread_cond_signal() wouldn't do anything (Skarupke, 2020). This is bad because that funciton is used by threads to communicate with each other, so if a thread tries to call the function and it randomly fails, that could cause the whole program to lock up (Skarupke, 2020). This function is used near universally, many programming languages make use of this function via wrapper calls, so it was imperative that the source of this bug be found and dealt with (Skarupke, 2020). A workaround was quickly devised, but it required calling a function that was computationally expensive, so the need for a proper fix remained.
 
-A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug with TLA+.
+A man named Malte Skarupke took it upon himself to see if it was possible to find the source of this bug using TLA+. He firstly worked his way through the problem area of the glibc code, translating the sections he wanted to test into TLA+ code. 
+
+Initally the code didn't produce any bugs, but after some simplifications and increasing the number of times a process is signaled up to four, a bug finally occured. The program reached a deadlock state where both processes were sleeping at a futex lock while there was still work to do, and the program was unable to wake either process up because it thought they were located in a signal group that neither process was actually apart of.
+
+From here Skarupke used the TLA+ file he had written to experiemnt around with different potential solutions to the bug, relying on the TLA+ model checker to determine if any of the changes resolved the bug or not. He was eventually able to come up with a fix for the bug that relied on processes declaring themselves to be asleep just before they finished their last piece of work. This change not only fixed the bug, but also allow Skarupke to simplify the glibc code significantly. He would go on to submit his findings to the developers of the glibc library.
+
+This story shows that TLA+ is a very capable tool for verification. As Skarupke describes, TLA+ has an incredible ability to narrow in on the exact faults within your program, along with providing you the shortest possible path that results in said bug (Skarupke, 2020). Additionally, thanks to the exisitance of pluscal, it's fairly easy to transfer a C or C++ program into TLA+ code. This allows you to more easily search your own code for bugs and quickly stress test solutions.
 
 ## Further Reasources
 
@@ -160,9 +166,9 @@ A man named Malte Skarupke took it upon himself to see if it was possible to fin
 
 - A [Wikipedia article](https://en.wikipedia.org/wiki/TLA%2B). This a good place to start if you would like a basic overview of the language.
 
+- The [Github repository](https://github.com/skarupke/glibc_cv_tla_plus) for all the code used in the case study above. 
+
 ## References
 
-https://probablydance.com/2020/10/31/using-tla-in-the-real-world-to-understand-a-glibc-bug/
-
-https://github.com/skarupke/glibc_cv_tla_plus
+- Using tla+ in the real world to understand a glibc bug. (2020, November 1). Probably Dance. https://probablydance.com/2020/10/31/using-tla-in-the-real-world-to-understand-a-glibc-bug/
 
