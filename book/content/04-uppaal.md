@@ -17,14 +17,6 @@ This chapter introduces **UPPAAL** for modeling timed automata and verifying tim
 
 ## Draft
 
-# Timed model checking with UPPAAL
-
-```
-**Chapter roles (Spring 2026)**
-Author: Ethan Tapia · Reviewer: Jake Triester
-See [Chapter assignments](0-chapter-assignments.md).
-```
-
 ## From untimed to timed model checking
 
 Earlier chapters covered tools like nuXmv, where time is *abstract* — transitions happen one after another with no notion of "how long." That's enough to reason about ordering ("eventually `q`," "always `p`," "`p` until `q`"), but not enough to reason about deadlines. If you want to ask "can the gate close within 5 seconds of a train approaching?" you need clocks.
