@@ -123,6 +123,25 @@ check ManagerOwnsAtLeastOneFile for 4
 
 Firstly, a new symbol that we can see here is the `~` symbol in `~manager`, which means the *reverse* of the manager relation (people managed by `p`). When we run `check ManagerOwnsAtLeastOneFile for 4`, this means that we are asking the Analyzer to find a counterexample for up to 4 atoms per type. If it reports "No counterexample found", that is strong evidence that your assertion holds, but it is not necessarily proof. However, in our example, it **will** find a counterexample because there is no fact enforcing that a manager must own a file, proving that the assertion is false.
 
+### Extends and Abstract
+
+Signatures can create subtypes from other signatures using the keyword `extends`. Subtypes are separate from each other and are subsets of the parent type.
+
+The keyword `abstract` can be used to prevent any atom from being a plain instance of that signature. Each atom must belong to one of its subtypes.
+
+For example:
+
+```alloy
+abstract sig Person{}
+sig Employee extends Person {}
+sig Guest extends Person {}
+```
+
+Here, each `Employee` and each `Guest` are a `Person`, but it is impossible to be both an `Employee` and a `Guest`. Contraints can be written that apply to all members of `Person`, or can be more specific and only apply to `Employee` or `Guest`, respectively. Since `Person` is `abstract` signature, that means that you cannot create an atom that is just a `Person`; it must be either a `Guest` or an `Employee`.
+
+
+
+
 ## A Small Full Model
 
 Now that we understand all of the keywords and how to use them, here is an example of a realistic model, a file system with owners and read/write permissions:
@@ -167,5 +186,81 @@ When you run the line `check OwnerCanAlwaysRead for 4`, the Analyzer will find n
 
 When you run the line `run SharedFileExists for 3 Person, 3 File`, the Alloy Analyzer will display an instance visualization. This will look like a graph with some concrete atoms and some arrows showing their relations. Since a graph has been made, you know that there exists at least one scenario that satisfies your model and predicate, and it gives you an intuitive picture of what this scenario looks like.
 
+## A Further Aspect - Ordering and Dynamic Models
+
+In all of our examples so far, the models have been static. Meaning, they describe what the world looks like at a specific instance, not how it changes over time. However, many systems involve cycling through many different states: a door locks and unlocks, a user logs in and out, a traffic light cycles through colors, etc. 
+
+In this chapter we're gonna focus on a traffic light system. In Alloy, we can achieve this the the `util/ordering` module.
+
+### Setting up the States
+
+```alloy
+open util/ordering[State]
+
+abstract sig Color {}
+one sig Red, Yellow, Green extends Color {}
+
+sig State {
+  light: one Color
+}
+```
+
+Using the keyword `one sig` means that only 1 atoms of that signature can exist. This means that in every instance, there is only 1 `Red`, 1 `Yellow`, and 1 `Green`.
+
+### Transitions
+
+Because we opened the module at the beginning, we are able to use the keywords `first`, `last`, and `next` to refer to our states.
+
+```alloy
+fact ValidTransitions {
+  all s: State - last |
+    let s' = s.next |
+      (s.light = Red    implies s'.light = Green)  and
+      (s.light = Green  implies s'.light = Yellow) and
+      (s.light = Yellow implies s'.light = Red)
+}
+
+fact StartsOnRed {
+  first.light = Red
+}
+```
+
+`State - last` is used to say "every state besides the last one". This is important because the last state has no `next`, so we need this line to avoid our system crashing. The `let` keyword is just used so that we don't have to write `s.next` each time, and can just write `s'` instead. In our system, we are stating the fact that the light starts on red because it needs to start at some state.
+
+### Running and Checking
+
+If you run the line:
+
+```alloy
+run {} for 6 State
+```
+
+The Analyzer will show a chain of 6 states: `Red` to `Green` to `Yellow` to `Red` to `Green` to `Yellow`, just as expected.
+
+### Assertions
+
+As we know, a traffic light should never go from Red straight to Yellow. We can check that with an assertion:
+
+```alloy
+assert NeverRedToYellow {
+  all s: State - last |
+    s.light = Red implies s.next.light != Yellow
+}
+
+check NeverRedToYellow for 8 State
+```
+
+The Analyzer doesn't show any counterexamples, proving that our assertion is true.
 
 
+## Resources
+
+The best way to truly learn how Alloy works and how to utilize it is to build models and run them. Here are the resources to do that:
+
+- Alloy Analyzer: https://alloytools.org. This is the official website to download the Alloy Analyzer tool.
+
+- Alloy Documentation: https://alloy.readthedocs.io/en/latest. Here is the reference documentation for the language that can answer any questions you might have.
+
+- Alloy4Fun: http://alloy4fun.inesctec.pt/. This is a webite that lets you run Alloy without having to download anything to your machine.
+
+- VS Code Alloy extension: https://marketplace.visualstudio.com/items?itemName=ArashSahebolamri.alloy. From here you can download the Alloy VS Code extension that allows you to execute Alloy code directly in your IDE.
