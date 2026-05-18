@@ -46,9 +46,9 @@ There are different types of probabilistic models PRISM can build and analyze:
 
 ### 2.1 Discrete-Time vs. Continuous-Time Markov Models 
 
-**Discrete-Time Markov Chains (DTMC)
+**Discrete-Time Markov Chains (DTMC)**
 
-**Continuous-Time Markov Chains (CTMC)
+**Continuous-Time Markov Chains (CTMC)**
 
 ### 2.2 Property Specification
 
