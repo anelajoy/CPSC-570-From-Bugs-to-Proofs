@@ -92,8 +92,83 @@ A predicate is a function that returns a boolean. In this example, it is checkin
     ensures index != -1 ==> 0 <= index < |q| && q[index] == key
 ```
 
+### Implementation
 
-## Exploration
+The method ``BinarySearch`` takes 2 arguments, a sequence of integer and a key to search.
+
+The iterative body maintains two pointers, ``lo`` and ``hi``, narrowing the search window with each iteration:
+
+```
+method BinarySearch(q: seq<int>, key: int) returns (index: int)
+  requires Sorted(q)
+  ensures index == -1 ==> forall i :: 0 <= i < |q| ==> q[i] != key
+  ensures index != -1 ==> 0 <= index < |q| && q[index] == key
+{
+  var lo := 0;
+  var hi := |q|;
+  index := -1;
+  while lo < hi
+    invariant 0 <= lo <= hi <= |q|
+    invariant forall i :: 0 <= i < lo ==> q[i] < key
+    invariant forall i :: 0 <= i < |q| ==> q[i] > key
+    decreases hi - lo
+  {
+    var mid := (lo + hi) / 2;
+    if q[mid] == key {
+      index := mid;
+      return;
+    } else if q[mid] < key {
+      lo := mid + 1;
+    } else {
+      hi := mid;
+    }
+  }
+}
+```
+
+### Invariants and Decreases
+
+Each of the three loop invariants plays a distinct role:
+
+```
+invariant 0 <= lo <= hi <= |q|
+```
+This invariant guarantees that ``lo`` and ``hi`` never escape the valid index range. Without it, **Dafny** cannot prove that the midpoint computation and the array accesses are safe. It ensures that, before the loop, ``lo = 0`` and ``hi = |q|`` holds and is preserved because each branch either increases ``lo`` or decreases ``hi`` within the window.
+
+```
+invariant forall i :: 0 <= i < lo ==> q[i] < key
+```
+Everything to the left of ``lo`` has already been ruled out, i.e. strictly smaller than the key. Because the sequence is sorted, once we move ``lo`` past position ``mid``, every element before ``lo`` is known to be less than ``key``.
+
+```
+invariant forall i :: 0 <= i < |q| ==> q[i] > key
+```
+Symmetrically, everything at or beyond ``hi`` is strictly greater. When ``lo`` and ``hi`` converge, invariants 2 and 3 together state that the key cannot be anywhere in the sequence, justifying the return of -1.
+
+```
+decreases hi - lo
+```
+The quantity ``hi - lo`` is a non-negative integer (by invariant 1) that strictly decreases every iteration. If the ``key`` is not found, ``mid`` is strictly between ``lo`` and ``hi``, so advancing ``lo`` or retreating ``hi`` always shrinks the window by at least 1. **Dafny** verifies this automatically.
+
+### A Note on Overflow 
+
+A notorious real-world bug in many binary search implementation is integer overflow in computing the midpoint. In languages with bounded integers, ``(lo + hi) / 2`` can overflow when ``lo`` and ``hi`` are large. **Dafny** uses mathematical integers that never overflow, so this entire class of bugs is excluded by the language's type system. **Dafny** verfier verifies that ``(lo + hi) / 2`` is used correctly without any explicit annotation from the programmer.
+
+### What Dafny Checks
+
+When this method is submitted to **Dafny**, the verifier checks all of the following automatically:
+
+- The precondition Sorted is satisfied at every call site.
+- Each loop invariant holds before the loop.
+- Each loop invariant is preserved by the loop body.
+- The decreases clause is strictly decreased each iteration.
+- Both postconditions hold when the method returns, for every possible return path.
+- All array/sequence accesses are within bound.
+If any check fails, **Dafny** returns a counterexample, i.e. a specific assignment of values that witnesses the failure, rather than just a generic error message.
+
+## Exploration - Dafny and Game Development
+
+
 
 
 ## References
