@@ -15,7 +15,7 @@ This chapter introduces **PyZX** for reasoning about quantum circuits using the 
 - Explore a further aspect depending on your interest.
 - Link to PyZX documentation and papers on completeness and rewrite strategies.
 
-# 1st Draft: To Be Reviewed...
+# 2nd Draft: To Be Reviewed...
 
 # PyZX: Reasoning About Quantum Circuits with Python and the ZX-Calculus
 
@@ -232,19 +232,19 @@ Second, extracting a circuit from a simplified ZX-diagram is not always trivial.
 Third, rewrite strategies are heuristic in practice. If PyZX verifies equality, that is strong evidence under the implemented strategy, but failure to verify does not necessarily prove two circuits are unequal. It may only mean the simplification strategy did not find a proof.
 
 ## Recommended Reading
-### PyZX documentation
+### [PyZX documentation](https://pyzx.readthedocs.io/en/latest/)
 The PyZX documentation is the best starting point for installation, syntax, supported gates, circuit import/export, simplification, and API details. It includes getting-started notebooks, supported-gates examples, optimization tutorials, and graph manipulation documentation.
 
-### PyZX FAQ
+### [PyZX FAQ](https://pyzx.readthedocs.io/en/latest/faq.html)
 The PyZX FAQ gives a beginner-friendly explanation of ZX-diagrams, why the ZX-calculus is useful, what PyZX can do, and what it is not good at. It is especially useful for writing the conceptual introduction of this chapter.
 
-### Picturing Quantum Software
+### [Picturing Quantum Software](https://zxcalc.github.io/book/html/main_html.html)
 Aleks Kissinger and John van de Wetering’s Picturing Quantum Software is a major textbook-style resource for learning the ZX-calculus and quantum compilation. The online version includes chapters on quantum circuits, CNOT circuits, Clifford diagrams, completeness, Clifford+T circuits, and compilation techniques.
 
-### PyZX paper
+### [PyZX paper](https://arxiv.org/pdf/1904.04735)
 The original PyZX paper, PyZX: Large Scale Automated Diagrammatic Reasoning, introduces PyZX as an open-source library for automated reasoning with large ZX-diagrams. It covers ZX basics, PyZX’s circuit and graph data structures, simplification, verification, circuit extraction, visualization, and integration with other tools.
 
-### Graph rewriting and model checking paper
+### [Graph rewriting and model checking paper](https://arxiv.org/pdf/2511.15581v1)
 The LMNtal/QLMNtal paper provides a useful contrast to PyZX. It treats ZX-calculus rewriting as a graph-rewriting and model-checking problem, emphasizing state-space exploration, strategy verification, and experimentation with rewrite systems.
 
 ## Conclusion
