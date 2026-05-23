@@ -134,7 +134,7 @@ Require Extraction.
 Extraction Language Haskell.
 Extraction "add_one.hs" add_one.
 ```
-**Require Extraction** is what loads Rocq's extraction system. **Extraction Language** defines the language (in this example, it would be Haskell) that will used to represent the translation of Rocq's logic into usable executable code. **"add_one.hs"** is the name of the output file for the extraction. The **add_one** after the output file is telling the extraction system that we will want to extract the contents of **add_one** onto the Haskell output file named **add_one.hs**.
+**Require Extraction** is what loads Rocq's extraction system. **Extraction Language** defines the language (in this example, it would be Haskell) that will used to represent the translation of Rocq's logic into usable executable code. **"add_one.hs"** is the name of the output file for the extraction. The **add_one** after the output file is telling the extraction system that we will want to extract the contents of **add_one** onto the Haskell output file named **add_one.hs**.[^8]
 
 Once the extraction is ran, the definition written inside Rocq will be automatically translated into the selected extraction language.
 
@@ -145,9 +145,9 @@ add_one n =
 ```
 The original definition in Rocq has been extracted into executable Haskell code.
 
-## Case Study
+## Real World Usage of Rocq Extraction
 
-TBA
+The **Compcert C Compiler** is a compiler for the C programming language, a fundamental programming language used in many computational components. The Compcert C Compiler was designed to be intended to be used for life-critical and mission-critical software for systems that need precision, such as systems for rockets and medical equipment. The compiler is trusted by many developers due to being formally verified through it's lowest level of mathematical proofs, making it completely excempt from miscompilation issues that are common in other C compilers. The developers of the Compcert C compiler verified the compiler's core logic through Rocq and extracted the Rocq definitions into OCaml code, which was later increased in size and complexity through C code.[^9] In the end, Rocq is a very valuable program that made itself crucial to the machine-assisted development of several kinds of theorems and systems by being both accurate and malleable enough to "grow" into larger and more complex executable instructions.
 
 ## References
 
@@ -166,3 +166,5 @@ TBA
 [^7]: Correct by Construction Wikipedia Page. (Link)[https://en.wikipedia.org/wiki/Correct_by_Construction]
 
 [^8]: Program Extraction from The Rocq Prover Reference Manual. (Link)[https://rocq-prover.org/doc/V9.2.0/refman/addendum/extraction.html]
+
+[^9]: The Compcert C Compiler Official Website. (Link)[https://compcert.org/compcert-C.html]
