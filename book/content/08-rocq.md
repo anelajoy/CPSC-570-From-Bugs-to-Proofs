@@ -120,7 +120,30 @@ While Rocq is mainly designed to prove theorems at its most basic level, extract
 
 ## How to Perform Program Extraction
 
-TBA
+The basic workflow for program extraction in Rocq is simple. All that is needed is to load Rocq's extraction framework onto any kind of definition or proposition written within the Rocq kernel, with either Ocaml or Haskell chosen as the output language.
+
+```rocq
+Definition add_one (n : nat) : nat :=
+  n + 1.
+```
+
+This is a simple definition written in *Gallina*, Rocq's functional programming language framework. **add_one** takes a natural number and adds **1** to it. Gallina specifically enforces the rule that all programs must terminate, which ensures that all programs that are written are *well-typed* and free from errors and contradictions.[^2] This is valuable to the process of extracting content from Rocq to executable source code, as it makes it necessary for the lower-level *logic* to make sense and be functional.
+
+```rocq
+Require Extraction.
+Extraction Language Haskell.
+Extraction "add_one.hs" add_one.
+```
+**Require Extraction** is what loads Rocq's extraction system. **Extraction Language** defines the language (in this example, it would be Haskell) that will used to represent the translation of Rocq's logic into usable executable code. **"add_one.hs"** is the name of the output file for the extraction. The **add_one** after the output file is telling the extraction system that we will want to extract the contents of **add_one** onto the Haskell output file named **add_one.hs**.
+
+Once the extraction is ran, the definition written inside Rocq will be automatically translated into the selected extraction language.
+
+```haskell
+add_one :: Nat -> Nat
+add_one n =
+  add n (S O)
+```
+The original definition in Rocq has been extracted into executable Haskell code.
 
 ## Case Study
 
