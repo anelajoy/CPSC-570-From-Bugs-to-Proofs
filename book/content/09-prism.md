@@ -174,11 +174,11 @@ rewards "steps"
 endrewards
 ```
 
-With this mode, we can ask:
+With this model, we can ask:
 
 ```
 // Expected steps to reach stable state
-R{"steps}=? [ F s=2 ]
+R{"steps"}=? [ F s=2 ]
 ```
 
 ### 3.3 Constants, Formulas, and Labels
