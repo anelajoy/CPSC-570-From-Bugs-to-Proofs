@@ -15,7 +15,7 @@ This chapter introduces **PyZX** for reasoning about quantum circuits using the 
 - Explore a further aspect depending on your interest.
 - Link to PyZX documentation and papers on completeness and rewrite strategies.
 
-# 2nd Draft: To Be Reviewed...
+# 3rd Draft: To Be submitted upon final review...
 
 # PyZX: Reasoning About Quantum Circuits with Python and the ZX-Calculus
 
@@ -29,7 +29,7 @@ The central idea behind this chapter is that PyZX gives programmers a practical 
 2. **ZX-diagrams**, which represent the same underlying linear-algebraic transformations graphically.
 3. **Python code**, which allows these diagrams to be generated, simplified, visualized, verified, and exported.
 
-The PyZX paper describes the ZX-calculus as a graphical language for reasoning about ZX-diagrams, which are tensor-network-like objects capable of representing arbitrary linear maps between qubits. PyZX then automates reasoning over these diagrams, especially for circuit optimization, equality validation, and visualization.
+The PyZX paper describes the ZX-calculus as a graphical language for reasoning about ZX-diagrams, which are tensor-network-like objects capable of representing arbitrary linear maps between qubits in contrast to quantum gates which only correspond to unitary linear maps (see [chapter 10](https://github.com/LEAP-at-Chapman/CPSC-570-From-Bugs-to-Proofs/blob/main/book/content/10-qiskit.md) for more information). PyZX then automates reasoning over these diagrams, especially for circuit optimization, equality validation, and visualization.
 
 This makes PyZX useful not just as a quantum programming tool, but as a **formal reasoning tool**. Instead of asking only “what gates are in this circuit?”, PyZX allows us to ask deeper questions:
 
@@ -143,10 +143,20 @@ This applies a powerful collection of rewrite strategies to the diagram. In PyZX
 
 At the lowest level are individual rewrite rules, each with a matcher and a rewriter. A matcher finds subgraphs where a rule can apply, and a rewriter changes the graph accordingly. Above that are basic simplifiers, which repeatedly apply a rule until it no longer matches. At the top are compound simplifiers, which combine multiple simplification routines into larger strategies.
 
-![PyZX graph](images-for-chapter-11/PyZX%20Simplification%20Example.png)
+![PyZX graph](images-for-chapter-11/PyZX_Simplification_Example.png)
 
 **Figure 1. Example of simplifying a quantum circuit with PyZX.**  
 This figure shows a circuit being converted into a ZX-diagram and then simplified using PyZX’s rewrite system. The upper diagram still resembles the original circuit structure, while the lower diagram shows the result after simplification. In the simplified version, PyZX has reorganized the computation into a graph of connected spiders and Hadamard edges. Although the lower diagram no longer looks like a standard gate-by-gate circuit, it represents the same underlying quantum operation. This illustrates the main advantage of PyZX: it can reason about circuits at the diagram level, where rewrite rules such as spider fusion, identity removal, local complementation, pivoting, and `full_reduce` can reveal simplifications that are difficult to see in ordinary circuit notation.
+
+### Generators and Composition in ZX-Diagrams
+
+ZX-diagrams are built from a small set of basic pieces called **generators**. The most important generators are **Z-spiders** and **X-spiders**, usually drawn as green and red nodes. A Z-spider represents structure in the computational basis, while an X-spider represents structure in the Hadamard-transformed basis. Each spider may have any number of input or output wires, and it may also carry a phase label such as $0$, $(\pi/2)$, or $(\pi/4)$. Hadamard gates are often represented by yellow boxes or by special Hadamard edges between spiders.
+
+These generators can be composed in two main ways. First, they can be composed **sequentially** by connecting the output wires of one diagram to the input wires of another. This corresponds to ordinary function composition or matrix multiplication. Second, diagrams can be composed **in parallel** by stacking them vertically. This corresponds to the tensor product of linear maps. In other words, a ZX-diagram is not just a drawing: it represents a linear-algebraic operation built by connecting smaller operations together.
+
+One reason ZX-diagrams are more flexible than ordinary circuit diagrams is that only the connectivity matters. Wires can bend, stretch, or move around as long as the same components remain connected in the same way. This makes ZX-diagrams useful for simplification because PyZX can apply rewrite rules directly to the graph structure rather than being restricted to the original gate-by-gate layout.
+
+Mathematically, ZX-diagrams form what is called a **dagger compact category** ([for further reading, click here]( https://en.wikipedia.org/wiki/Dagger_compact_category)). Very briefly, this means the diagram language supports composition, tensor product, wire bending through cups and caps, and an adjoint-like operation called a dagger. This categorical structure is part of why ZX-diagrams behave so naturally as a language for quantum processes, but for this chapter, the key practical idea is simpler: PyZX uses these diagrams as graph-like representations that can be rewritten while preserving the meaning of the quantum computation.
 
 ## Applications in Industry
 
