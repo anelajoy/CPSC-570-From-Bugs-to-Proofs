@@ -56,7 +56,7 @@ ASSIGN
 
 ## Temporal Logic
 
-After specifying all state transitions, we are ready to put our design rules to the test. The language in which we express these rules is temporal logic, writing these rules as unambiguous mathematical formulas. In particular, we leverage two sublogics: Linear Temporal Logic (LTL) and Computation Tree Logic (CTL), which we discuss in more detail later. This allows us to make propositions like “This property always holds”, “Eventually, this property holds”, or “This property could hold”. A practical example of this is making statements like “There will always be no more than one train crossing an intersection at a time” or “It is always the case that I will eventually receive a packet from the server”. With examples like these in mind, it quickly becomes obvious how model checkers can be tremendously helpful when designing on the conceptual level, as these models do not need to be language-specific. Some general properties that we can express include fairness, liveness, and atomicity. Here is an example of these types of specifications (See the LTL, CTL, NuSMV sections for clarity):
+After specifying all state transitions, we are ready to put our design rules to the test. The language in which we express these rules is temporal logic, writing these rules as unambiguous mathematical formulas. In particular, we leverage two sublogics: [Linear Temporal Logic](https://en.wikipedia.org/wiki/Linear_temporal_logic) (LTL) and [Computation Tree Logic](https://en.wikipedia.org/wiki/Computation_tree_logic) (CTL), which we discuss in more detail later. This allows us to make propositions like “This property always holds”, “Eventually, this property holds”, or “This property could hold”. A practical example of this is making statements like “There will always be no more than one train crossing an intersection at a time” or “It is always the case that I will eventually receive a packet from the server”. With examples like these in mind, it quickly becomes obvious how model checkers can be tremendously helpful when designing on the conceptual level, as these models do not need to be language-specific. Some general properties that we can express include fairness, liveness, and atomicity. Here is an example of these types of specifications [See the LTL, CTL, NuSMV sections for clarity](#basic-theory):
 
 ```code
 LTLSPEC G safe 
@@ -101,13 +101,16 @@ NuSMV permits the use of both LTL and CTL formulas, enabling us to check a wider
 
 ### LTL Operators
 
-| Meaning           | Mathematical Syntax | nuSMV Syntax |
-| ----------------- | ------------------- | ------------ |
-| Next              |   ◯ p              | `X p`        |
-| Eventually        |   ◇ p              | `F p`        |
-| Globally / Always |   □ p               | `G p`        |
-| Until             |   p   U   q         | `p U q`      |
-| Release           |   p   R   q         | `p R q`      |
+| Meaning           | Mathematical Syntax | nuSMV Syntax |                      Explanation                                         | 
+| ----------------- | ------------------- | ------------ | ------------------------------------------------------------------------ |
+| Proposition       |   p                 | `p`          | This propostion (`p`) holds at the current (first) state in the sequence |
+| Next              |   ◯ p              | `X p`        | p holds in the next state in the sequence                                |
+| Eventually        |   ◇ p              | `F p`        | p holds for at least one future state in the sequence                    |
+| Globally / Always |   □ p               | `G p`        | p holds for the entire sequence                                          |
+| Until             |   p   U   q         | `p U q`      | p holds for all states in the sequence up to the state where q holds     |
+| Release           |   p   R   q         | `p R q`      | q holds up to and including the state where p holds for the first time   |
+
+
 
 ### CTL Path Quanitifiers
 
@@ -218,36 +221,38 @@ LTLSPEC G (f2_call -> F (Call_2_Served))
 LTLSPEC G (f3_call -> F (Call_3_Served))
 ```
 
-In this elevator example, we have a couple of specifications that we would want to hold true in a real-world system. In this case, "safe" represents the concept that "if the elevator is moving then the doors must be closed". We would want this guarantee of safety for passengers to always be the case. Thus, by specifying the CTL formula that all states along all branches must uphold this property, we can either identify states where passengers could be at risk or ensure that scenario is never possible within the scope of our system. Similarly, there are also spefications depicted here relating to guarantees about service such as "if I call for the elevator, it must come to me eventually". 
+In this elevator example, we have a couple of specifications that we would want to hold true in a real-world system. In this case, "safe" represents the concept that "if the elevator is moving then the doors must be closed". We would want this guarantee of safety for passengers to always be the case. Thus, by specifying the CTL formula that all states along all branches must uphold this property, we can either identify states where passengers could be at risk or ensure that scenario is never possible within the scope of our system. Similarly, there are also specifications depicted here relating to guarantees about service such as "if I call for the elevator, it must come to me eventually". 
 
 ## Improvements of nuXmv
 
-NuXmv is an extension of NuSMV with the most notable difference being that we can now model infinite state transition systems. This functionality was implemented by adding two new types, real and integer, as well as a suite of new algorithms for both finite and infinite state systems. This is particularly helpful in many realistic applications where our model is not bounded. Some examples of this include when our model includes unbounded arrays or other data structures. However, NuXmv has the tradeoff that it no longer supports asynchronous systems. 
+NuXmv is an extension of NuSMV with the most notable difference being that we can now model infinite state transition systems. This functionality was implemented by adding two new types, `real` and `integer`, as well as a suite of new algorithms for both finite and infinite state systems. This is particularly helpful in many realistic applications where our model is not bounded. Some examples of this include when our model includes unbounded arrays or other data structures. However, NuXmv has the tradeoff that it no longer supports asynchronous systems. 
 
 # History of NuSMV
 
 ## Foundations of Model Checking
 
-At the foundation of model checking are Kripke structures. The labelled state transition graph pictured above is one such example of a Kripke structure. These graphs were proposed in the 1950s as a means of representing system behaviors with the intent of applying them to manual proof checking and verification. 
+At the foundation of model checking are [Kripke structures](https://en.wikipedia.org/wiki/Kripke_structure_(model_checking)). The labelled state transition graph pictured above is one such example of a Kripke structure. These graphs were proposed in the 1950s as a means of representing system behaviors with the intent of applying them to manual proof checking and verification. 
 
 By the 1970s, LTL and CTL were introduced and deemed efficient ways of expressing desirable properties and constructing proofs to formally verify these properties, making them ideal for applications in computer science and systems engineering. 
 
-In the early 1980s, it was proposed that, rather than developing proofs by hand, the entire state space of finite-state systems could be explored by a computer, providing an even easier method of verification. This is when the notion of modern model checking started to take shape. The only issue with this approach was the “state explosion problem”. This refers to the exponential growth of the state space as the number of variables within a system increases, making automated verification no longer a viable option after a certain point. One solution to this is Binary Decision Diagrams (BDDs), which allow for the symbolic representation of state spaces. By removing the need to explicitly create every possible state, automation remains a useful tool in verification. 
+In the early 1980s, it was proposed that, rather than developing proofs by hand, the entire state space of finite-state systems could be explored by a computer, providing an even easier method of verification. This is when the notion of modern model checking started to take shape. The only issue with this approach was the “state explosion problem”. This refers to the exponential growth of the state space as the number of variables within a system increases, making automated verification no longer a viable option after a certain point. One solution to this is [Binary Decision Diagrams](https://en.wikipedia.org/wiki/Binary_decision_diagram)(BDDs), which allow for the symbolic representation of state spaces. By removing the need to explicitly create every possible state, automation remains a useful tool in verification. 
 
 ## SMV1, NuSMV, and nuXmv
 
 Symbolic Model Verifier (SMV) became the first BDD-based automated model checker in 1990 as a result of PhD research at Carnegie Mellon University. While being the first of its kind, it still had many limitations. 
-In 1999, NuSMV was created: a complete redesign and extension of SMV with such additions like LTL and with the intention of being open-source. Two years later, NuSMV2 was released, introducing an alternative means of symbolic representation, propositional satisfiability (SAT). 
-In 2014, nuXmv extended NuSMV further by adding new SAT and Satisfiability Modulo Theory-based (SMT) verification algorithms and permitting infinite-state models. NuXMV has been used in various other projects, such as Electrum, Kratos, OCRA, XSAP, etc., since then. 
+In 1999, NuSMV was created: a complete redesign and extension of SMV with such additions like LTL and the intention of being open-source. Two years later, NuSMV2 was released, introducing an alternative means of symbolic representation: propositional satisfiability (SAT). 
+In 2014, nuXmv extended NuSMV further by adding new SAT and Satisfiability Modulo Theory-based (SMT) verification algorithms and permitting infinite-state models. NuXmv has been used in various projects, such as [Electrum](https://haslab.github.io/Electrum/), [Kratos](https://es.fbk.eu/index.php/tools/kratos/), [OCRA](https://ocra.fbk.eu/), [xSAP](https://xsap.fbk.eu/), [etc.](https://nuxmv.fbk.eu/tools-using-nuxmv.html), since then. 
 
 # Tool Pages and User Manuals
 
-https://nusmv.fbk.eu/
+Bozzano, M., Cavada, R., Cimatti, A., Dorigatti, M., Griggio, A., Mariotti, A., Micheli, A., 
+    Mover, S., Roveri, M., & Tonetta, S. (n.d.). NUXMV 2.1.0 User Manual. 
+    nuxmv.fbk.eu. https://nuxmv.fbk.eu/downloads/nuxmv-user-manual.pdf
 
-https://nuxmv.fbk.eu/ 
+Cavada, R., Cimatti, A., Jochim, C. A., Keighren, G., Olivetti, E., Pistore, M., Roveri, M., 
+    & Tchaltsev, A. (n.d.). NuSMV 2.7.0 User Manual. 
+    https://nusmv.fbk.eu/userman/v27/nusmv.pdf
 
-https://nusmv.fbk.eu/userman/v27/nusmv.pdf
+NuSMV home page. (n.d.). Retrieved May 27, 2026, from https://nusmv.fbk.eu/ 
 
-https://nuxmv.fbk.eu/downloads/nuxmv-user-manual.pdf
-
-
+nuXmv—Home. (n.d.). Retrieved May 27, 2026, from https://nuxmv.fbk.eu/ 
