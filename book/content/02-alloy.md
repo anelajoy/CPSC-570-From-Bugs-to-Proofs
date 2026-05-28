@@ -129,6 +129,8 @@ check ManagerOwnsAtLeastOneFile for 4
 
 Firstly, a new symbol that we can see here is the `~` symbol in `~manager`, which means the *reverse* of the `manager` relation (people managed by `p`). When we run `check ManagerOwnsAtLeastOneFile for 4`, this means that we are asking the Analyzer to find a counterexample for up to 4 atoms per type. If it reports "No counterexample found", that is strong evidence that your assertion holds, but it is not necessarily proof. However, in our example, it **will** find a counterexample because there is no fact enforcing that a manager must own a file, proving that the assertion is false.
 
+To look for a counterexample, the Analyzer doesn't just abstractly reason about your model when you run a `check` command. It actually translates the whole model and the negation of the assertion into a boolean satisfiability (SAT) problem. From there, there is an underlying SAT solver that is able to determine any counterexamples.
+
 ### Extends and Abstract
 
 Signatures can create subtypes from other signatures using the keyword `extends`. Subtypes are separate from each other and are subsets of the parent type.
